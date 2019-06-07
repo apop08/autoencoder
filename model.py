@@ -39,7 +39,7 @@ model.add(MaxPooling2D((2, 2), padding='same'))
 model.add(Flatten())
 model.add(Dense(256))
 model.add(Dense(784))
-model.add(Reshape(16, 7, 7))
+model.add(Reshape((16, 7, 7))
 model.add(UpSampling2D(2, 2))
 model.add(Conv2D(16, (3, 3), activation=ACTIVATION,
                  padding='same'))
