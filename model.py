@@ -6,8 +6,7 @@ import sys
 from keras import backend as K
 
 ACTIVATION = 'relu'
-input_data_path = sys.argv[2]
-output_path = sys.argv[3]
+
 
 
 batch_size = 128
