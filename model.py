@@ -16,32 +16,26 @@ img_rows, img_cols = 28, 28
 
 input_img = Input(shape=(28, 28, 1))  # adapt this if using `channels_first` image data format
 
-x = Conv2D(8, (3, 3), activation=ACTIVATION, padding='same')(input_img)
-x = Conv2D(8, (3, 3), activation=ACTIVATION, padding='same')(x)
-
-x = MaxPooling2D((2, 2), padding='same')(x)
-
-x = Conv2D(16, (3, 3), activation=ACTIVATION, padding='same')(x)
-x = Conv2D(16, (3, 3), activation=ACTIVATION, padding='same')(x)
+x = Conv2D(16, (3, 3), activation=ACTIVATION, padding='same')(input_img)
 
 x = MaxPooling2D((2, 2), padding='same')(x)
 
 x = Conv2D(8, (3, 3), activation=ACTIVATION, padding='same')(x)
+
+x = MaxPooling2D((2, 2), padding='same')(x)
+
 x = Conv2D(8, (3, 3), activation=ACTIVATION, padding='same')(x)
 
 encoded = MaxPooling2D((2, 2), padding='same')(x)
 
 x = Conv2D(8, (3, 3), activation=ACTIVATION, padding='same')(encoded)
+
+x = UpSampling2D((2, 2))(x)
+
 x = Conv2D(8, (3, 3), activation=ACTIVATION, padding='same')(x)
 
 x = UpSampling2D((2, 2))(x)
 
-x = Conv2D(16, (3, 3), activation=ACTIVATION, padding='same')(x)
-x = Conv2D(16, (3, 3), activation=ACTIVATION, padding='same')(x)
-
-x = UpSampling2D((2, 2))(x)
-
-x = Conv2D(16, (3, 3), activation=ACTIVATION, padding='same')(x)
 x = Conv2D(16, (3, 3), activation=ACTIVATION, padding='same')(x)
 
 x = UpSampling2D((2, 2))(x)
