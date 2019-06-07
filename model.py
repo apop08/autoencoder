@@ -5,46 +5,35 @@ from keras.layers import Conv2D, MaxPooling2D, Flatten, Reshape
 import sys
 from keras import backend as K
 import matplotlib as plt
-ACTIVATION = 'relu'
+import numpy as np
+
 (x_train, _), (x_test, _) = mnist.load_data()
 
 
 batch_size = 128
 epochs = 12
 
-img_rows, img_cols = 28, 28
-
 input_img = Input(shape=(28, 28, 1))  # adapt this if using `channels_first` image data format
 
-x = Conv2D(16, (3, 3), activation=ACTIVATION, padding='same')(input_img)
-
+x = Conv2D(16, (3, 3), activation='relu', padding='same')(input_img)
 x = MaxPooling2D((2, 2), padding='same')(x)
-
-x = Conv2D(8, (3, 3), activation=ACTIVATION, padding='same')(x)
-
+x = Conv2D(8, (3, 3), activation='relu', padding='same')(x)
 x = MaxPooling2D((2, 2), padding='same')(x)
-
-x = Conv2D(8, (3, 3), activation=ACTIVATION, padding='same')(x)
-
+x = Conv2D(8, (3, 3), activation='relu', padding='same')(x)
 encoded = MaxPooling2D((2, 2), padding='same')(x)
 
-x = Conv2D(8, (3, 3), activation=ACTIVATION, padding='same')(encoded)
+# at this point the representation is (4, 4, 8) i.e. 128-dimensional
 
+x = Conv2D(8, (3, 3), activation='relu', padding='same')(encoded)
 x = UpSampling2D((2, 2))(x)
-
-x = Conv2D(8, (3, 3), activation=ACTIVATION, padding='same')(x)
-
+x = Conv2D(8, (3, 3), activation='relu', padding='same')(x)
 x = UpSampling2D((2, 2))(x)
-
-x = Conv2D(16, (3, 3), activation=ACTIVATION, padding='same')(x)
-
+x = Conv2D(16, (3, 3), activation='relu')(x)
 x = UpSampling2D((2, 2))(x)
-
 decoded = Conv2D(1, (3, 3), activation='sigmoid', padding='same')(x)
+
 autoencoder = Model(input_img, decoded)
 autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy')
-
-import numpy as np
 
 (x_train, _), (x_test, _) = mnist.load_data()
 
