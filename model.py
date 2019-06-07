@@ -1,6 +1,6 @@
 from keras.models import Model
 from keras.datasets import mnist
-from keras.layers import Dense, UpSampling2D
+from keras.layers import Dense, UpSampling2D, Input
 from keras.layers import Conv2D, MaxPooling2D, Flatten, Reshape
 import sys
 from keras import backend as K
