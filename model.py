@@ -48,7 +48,7 @@ x = UpSampling2D((2, 2))(x)
 
 decoded = Conv2D(1, (3, 3), activation='sigmoid', padding='same')(x)
 autoencoder = Model(input_img, decoded)
-autoencoder.compile(optimzer='adadelta', loss='binary_crossentropy')
+autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy')
 
 import numpy as np
 
