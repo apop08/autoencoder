@@ -40,12 +40,12 @@ model.add(Flatten())
 model.add(Dense(256))
 model.add(Dense(784))
 model.add(Reshape((16, 7, 7)))
-model.add(UpSampling2D(2, 2))
+model.add(UpSampling2D((2, 2)))
 model.add(Conv2D(16, (3, 3), activation=ACTIVATION,
                  padding='same'))
 model.add(Conv2D(16, (3, 3), activation=ACTIVATION,
                  padding='same'))
-model.add(UpSampling2D(2, 2))
+model.add(UpSampling2D((2, 2)))
 model.add(Conv2D(8, (3, 3), activation=ACTIVATION,
                  padding='same'))
 model.add(Conv2D(1, (3, 3), activation=ACTIVATION, padding='same'))
